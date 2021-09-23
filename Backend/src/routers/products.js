@@ -18,6 +18,7 @@ router.get("/products", async(req,res) => {
     try {
         const getProducts = await ProductsStore.find({});
         res.send(getProducts);
+        console.log(getProducts);
     } catch (error) {
         res.status(400).send(error);
     }
