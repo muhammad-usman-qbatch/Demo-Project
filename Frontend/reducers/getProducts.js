@@ -1,47 +1,44 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
-const initialState = {
-    count : 0,
-    productsList : []
-};
 
 export const getProductsList = createAsyncThunk(
     'getProductsList',
     async () => {
-        let res = await axios.get("http://localhost:4000/products")
-        // console.log("create async thunk ",res.data);
-        console.log("create async thunk ",res.data);
-        const res1 = await res.json();
-        // return res.data
-        return res1.data
+        try {
+            let res = await axios.get("http://localhost:4000/products");
+            console.log("create async thunk ",res.data);
+            return res.data
+        } catch (error) {
+            console.log(error);
+        }
     }
 );
 
 const productsReducer= createSlice({
     name : 'Products',
-    initialState,
+    initialState: {
+        count : 0,
+        productsList : [],
+        loading: false
+    },
     reducers : {
-        getProducts2(state, action){
-            state.productsList = action.payload
-        }
+        // getCount(state, action){
+        //     state.count = action.payload
+        // }
     },
     extraReducers:{
         [getProductsList.fulfilled] : (state, action) => {
-            console.log("payload",action.payload);
             state.productsList = action.payload
-            // return {
-            //     ...state,
-            //     productsList:action.payload
-            // }
+            state.count = action.payload.length
         },
         [getProductsList.pending] : (state, action) => {
-            state.productsList = 'Loading...'
+            state.loading = true
         },
         [getProductsList.rejected] : (state, action) => {
-            state.productsList = 'Try again...'
+            state.loading = false
         },
     }
 });
 
-export const {getProducts2} = productsReducer.actions
+export const {getCount} = productsReducer.actions
 export default productsReducer.reducer

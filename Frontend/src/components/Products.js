@@ -1,41 +1,50 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsList } from '../../reducers/getProducts';
+import { getProductsList, getCount } from '../../reducers/getProducts';
 
 export default function Products() {
 
-    // const {count, productsList} = useSelector((state) => {
-    //     console.log(`Product Count ${state.count}`);
-    //     console.log(`Product List ${state.productsList}`);
-    //     return state;
-    // });
+    const {count, productsList} = useSelector((state) => {
+        console.log("Product Count", state.count);
+        return state;
+    });
 
     const dispatch = useDispatch();
-
-    // const getProductsList1 = () => {
-    //     dispatch(getProductsList());
-    // }
-
-    // const [products, setProducts] = useState([]);
-
+    
     useEffect(() => {
         console.log("Fetching the Products:");
         dispatch(getProductsList());
-        // let data = getProductsList1();
-        // setProducts(data);
-        // console.log(`Product list : ${data}`);
-        // console.log(`Product list : ${productsList}`);
-    },[])
+    },[]);
 
     return (
         <div>
-           {/* <button onClick = {()=>getProductsList1()}>get products</button> */}
-           {/* <p>a.</p>
-           <h1>{productsList}</h1>
-           <p>b.</p>
-           <h1>{products}</h1> */}
-           <h2>Products</h2>
+           <h2>Products Count</h2>
+           <h1>{count}</h1>
+           <h2>Products List Length</h2>
+           <h1>{productsList.length}</h1>
+           <h2>Products Detail</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th style={{width: '30%'}}>ID</th>
+                        <th style={{width: '11%'}}>Name</th>
+                        <th style={{width: '11%'}}>Price</th>
+                        <th style={{width: '10%'}}>Stock</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {productsList.map((product,index) => (
+                  <tr>
+                     <td>{product._id}</td>
+                     <td>{product.name}</td>
+                     <td>{product.price}</td>
+                     <td>{product.stock}</td>
+                     <button>Add to Cart</button>
+                  </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
     )
 };
