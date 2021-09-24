@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsList, getCount } from '../../reducers/getProducts';
+import { getProductsList} from '../../reducers/getProducts';
 
 export default function Products() {
 
