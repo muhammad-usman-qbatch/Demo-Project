@@ -15,7 +15,7 @@ export default function Products() {
     useEffect(() => {
         console.log("Fetching the Products:");
         dispatch(getProductsList());
-    },[]);
+    },[count]);
 
     return (
         <div>
