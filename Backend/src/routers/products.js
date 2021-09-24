@@ -17,8 +17,9 @@ router.post("/products", async(req,res) => {
 router.get("/products", async(req,res) => {
     try {
         const getProducts = await ProductsStore.find({});
+        console.log('getProducts ', getProducts);
+        // res.json({products: getProducts});
         res.send(getProducts);
-        console.log(getProducts);
     } catch (error) {
         res.status(400).send(error);
     }

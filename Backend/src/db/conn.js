@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 const express = require('express');
 const app = express();
-const cors = require("cors");
 
-app.use(cors());
 
 mongoose.connect("mongodb://localhost:27017/products_store",
     {
