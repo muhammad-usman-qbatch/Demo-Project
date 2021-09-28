@@ -1,8 +1,10 @@
 import React from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getProductsList} from '../reducers/getProducts';
+import { getProductsList } from '../reducers/productReducer';
 import '../products.css'
+import { addToCart } from '../reducers/cartReducer';
 
 export default function Products() {
 
@@ -17,6 +19,10 @@ export default function Products() {
         console.log("Fetching the Products:");
         dispatch(getProductsList());
     },[]);
+
+    // const addToCart1 = (product_id) => {
+    //     dispatch(addToCart(product_id));
+    // }
 
     return (
         <div>
@@ -37,11 +43,11 @@ export default function Products() {
                 <tbody>
                 {productsList.map((product,index) => (
                   <tr key={product._id}>
-                     <td>{product._id}</td>
+                     <td id='p_id'>{product._id}</td>
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     <td id='cartButton'><p id='box'>Add to Cart</p></td>
+                     {/* <td id='cartButton'><NavLink to='/products/addToCart'><button onClick={()=>{addToCart1(product._id)}} disabled={!product.stock}>Add to Cart</button></NavLink></td> */}
                   </tr>
                     ))}
                 </tbody>
