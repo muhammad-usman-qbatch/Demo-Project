@@ -20,11 +20,11 @@ export default function Products() {
 
     return (
         <div>
-           <h2>Products Count</h2>
-           <h1>{count}</h1>
-           <h2>Products List Length</h2>
-           <h1>{productsList.length}</h1>
-           <h2>Products Detail</h2>
+           <h1>Products Count</h1>
+           <p>{count}</p>
+           <h1>Products List Length</h1>
+           <p>{productsList.length}</p>
+           <h1>Products Detail</h1>
             <table>
                 <thead>
                     <tr>
@@ -41,7 +41,7 @@ export default function Products() {
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     <p id='box'>Add to Cart</p>
+                     <td id='cartButton'><p id='box'>Add to Cart</p></td>
                   </tr>
                     ))}
                 </tbody>
