@@ -2,6 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList} from '../../reducers/getProducts';
+import '../products.css'
 
 export default function Products() {
 
@@ -15,7 +16,7 @@ export default function Products() {
     useEffect(() => {
         console.log("Fetching the Products:");
         dispatch(getProductsList());
-    },[count]);
+    },[]);
 
     return (
         <div>
@@ -35,12 +36,12 @@ export default function Products() {
                 </thead>
                 <tbody>
                 {productsList.map((product,index) => (
-                  <tr>
+                  <tr key={product._id}>
                      <td>{product._id}</td>
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     <button>Add to Cart</button>
+                     <p id='box'>Add to Cart</p>
                   </tr>
                     ))}
                 </tbody>
