@@ -6,13 +6,14 @@ import {Provider} from 'react-redux';
 import productsReducer from './reducers/productReducer';
 import cartReducer from "./reducers/cartReducer";
 import logger from 'redux-logger';
+import { combineReducers } from "redux";
 
-
+// const allReducers = combineReducers({
+//     productsReducer,
+//     cartReducer
+// })
 const store = configureStore({
-    reducer : {
-        productsReducer,
-        cartReducer
-    },
+    reducer : productsReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
 

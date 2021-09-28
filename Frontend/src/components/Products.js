@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
 import '../products.css'
-import { addToCart } from '../reducers/cartReducer';
+// import { addToCart } from '../reducers/cartReducer';
 
 export default function Products() {
 
@@ -47,7 +47,7 @@ export default function Products() {
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     <td id='cartButton'><NavLink to='/products/addToCart'><button onClick={()=>{addToCart1(product._id)}} disabled={!product.stock}>Add to Cart</button></NavLink></td>
+                     <td id='cartButton'><NavLink to='/products/addToCart'><button disabled={!product.stock}>Add to Cart</button></NavLink></td>
                   </tr>
                     ))}
                 </tbody>
