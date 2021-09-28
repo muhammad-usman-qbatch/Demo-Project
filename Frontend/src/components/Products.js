@@ -47,7 +47,7 @@ export default function Products() {
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     {/* <td id='cartButton'><NavLink to='/products/addToCart'><button onClick={()=>{addToCart1(product._id)}} disabled={!product.stock}>Add to Cart</button></NavLink></td> */}
+                     <td id='cartButton'><NavLink to='/products/addToCart'><button onClick={()=>{addToCart1(product._id)}} disabled={!product.stock}>Add to Cart</button></NavLink></td>
                   </tr>
                     ))}
                 </tbody>
