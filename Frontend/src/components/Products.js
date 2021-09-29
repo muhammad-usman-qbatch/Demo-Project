@@ -1,17 +1,14 @@
 import React from 'react';
+import '../products.css'
 import { NavLink, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
-import '../products.css'
-// import { addToCart } from '../reducers/cartReducer';
+import { addToCart } from '../reducers/cartReducer';
 
 export default function Products() {
 
-    const {count, productsList} = useSelector((state) => {
-        console.log("Product Count", state.count);
-        return state;
-    });
+    const {count, productsList} = useSelector((state) => state.productsReducer);
 
     const dispatch = useDispatch();
     
@@ -20,9 +17,10 @@ export default function Products() {
         dispatch(getProductsList());
     },[]);
 
-    // const addToCart1 = (product_id) => {
-    //     dispatch(addToCart(product_id));
-    // }
+    const addToCart1 = (product_id) => {
+        console.log("product id", typeof product_id, product_id)
+        dispatch(addToCart(product_id));
+    }
 
     return (
         <div>
@@ -47,7 +45,7 @@ export default function Products() {
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     <td id='cartButton'><NavLink to='/products/addToCart'><button disabled={!product.stock}>Add to Cart</button></NavLink></td>
+                     <td id='cartButton'><NavLink to='/products/addToCart'><button onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>Add to Cart</button></NavLink></td>
                   </tr>
                     ))}
                 </tbody>

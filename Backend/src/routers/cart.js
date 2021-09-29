@@ -4,9 +4,10 @@ const router = new express.Router();
 const CartStore = require('../models/cart');
 
 router.post("/products/addToCart", async(req,res) => {
+    console.log("req.body", typeof req, req.body);
     try {
         const addProductsToCart = new CartStore(req.body);
-        console.log(req.body);
+        console.log('1',req.body);
         let insertProductsToCart = await addProductsToCart.save();
         res.status(201).send(insertProductsToCart);
     } catch (error) {

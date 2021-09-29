@@ -4,16 +4,14 @@ import App from './components/App'
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from 'react-redux';
 import productsReducer from './reducers/productReducer';
-import cartReducer from "./reducers/cartReducer";
+import cartsReducer from './reducers/cartReducer'
 import logger from 'redux-logger';
-import { combineReducers } from "redux";
 
-// const allReducers = combineReducers({
-//     productsReducer,
-//     cartReducer
-// })
 const store = configureStore({
-    reducer : productsReducer,
+    reducer : {
+    productsReducer,
+    cartsReducer
+    },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 });
 
