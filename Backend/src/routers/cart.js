@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 
 const CartStore = require('../models/cart');
+const ProductsStore = require("../models/products");
 
 router.post("/products/addToCart", async(req,res) => {
     console.log("req.body", typeof req, req.body);
@@ -17,10 +18,52 @@ router.post("/products/addToCart", async(req,res) => {
 
 router.get("/cart", async(req,res) => {
     try {
-        const getProductsFromCart = await CartStore.find({});
-        console.log('getProducts from cart', getProductsFromCart);
+        console.log('Cart get api')
+        // const cart = await db.CartStore.aggregate([
+        //     {
+        //         $lookup : {
+        //             from : 'ProductsStore',
+        //             localfield : 'p_id',
+        //             foreignfield : '_id',
+        //             as : 'cart_store'
+        //         }
+        //     }
+        // ])
+        // const cartStore = cart.find({})
+        // const getProductsFromCart = await CartStore.find({});
+        // console.log('getProducts from cart', getProductsFromCart);
         // res.json({products: getProducts});
-        res.json(getProductsFromCart);
+        // res.json(getProductsFromCart);
+        // console.log('Cart',cart)
+        // res.json(cart);
+        // console.log('Cart Store', cartStore)
+        await CartStore.aggregate([
+            {
+              "$project": {
+                "p_id": {
+                  "$toObjectId": "$p_id"
+                }
+              }
+            },
+            {
+              $lookup: {
+                from: 'productstores',
+                localField: 'p_id',
+                foreignField: '_id',
+                as: "product_store"
+              }
+            },
+            {
+                $unwind: "$product_store",
+            },
+          ])
+            .then((result) => {
+              console.log('result',result);
+              res.json(result);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
     } catch (error) {
         res.status(400).send(error);
     }

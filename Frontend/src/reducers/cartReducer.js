@@ -49,7 +49,7 @@ const cartsReducer= createSlice({
     [addToCart.fulfilled] : (state,action) => {
             console.log("payload of cart", action.payload)
             state.cartList = action.payload
-            state.count = action.payload.length
+            // state.count = action.payload.length
     },
     [addToCart.pending] : (state,action) => {
             state.loading = true
