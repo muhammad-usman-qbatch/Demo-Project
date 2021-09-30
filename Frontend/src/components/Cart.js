@@ -5,13 +5,14 @@ import { getFromCart } from "../reducers/cartReducer";
 
 export default function Cart() {
 
-    const {count, cartList} = useSelector((state) => state.cartsReducer);
+    let {count, cartList} = useSelector((state) => state.cartsReducer);
     const dispatch = useDispatch();
 
     useEffect(() => {
+        cartList = [];
         console.log("Fetching Products from cart")
         dispatch(getFromCart());
-    }, [])
+    },[])
 
     return (
         <div>
@@ -24,14 +25,16 @@ export default function Cart() {
              <thead>
                  <tr>
                      <th style={{width: '30%'}}>ID</th>
-                     <th style={{width: '11%'}}>product id</th>
+                     <th style={{width: '11%'}}>Name</th>
+                     <th style={{width: '11%'}}>Price</th>
                  </tr>
              </thead>
              <tbody>
-             {cartList.map((product,index) => (
-               <tr key={product._id}>
-                 <td>{product._id}</td>
-                 <td>{product.p_id}</td>
+             {cartList.map((product) => (
+               <tr key={product.p_id}>
+                  <td id='p_id'>{product.p_id}</td>
+                  <td>{product.product_store.name}</td>
+                  <td>{product.product_store.price}</td>
                </tr>
                  ))}
              </tbody>

@@ -15,7 +15,7 @@ export default function Products() {
     useEffect(() => {
         console.log("Fetching the Products:");
         dispatch(getProductsList());
-    },[]);
+    },[count]);
 
     const addToCart1 = (product_id) => {
         console.log("product id", typeof product_id, product_id)
@@ -39,13 +39,21 @@ export default function Products() {
                     </tr>
                 </thead>
                 <tbody>
-                {productsList.map((product,index) => (
+                {productsList.map((product) => (
                   <tr key={product._id}>
                      <td id='p_id'>{product._id}</td>
                      <td>{product.name}</td>
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
-                     <td id='cartButton'><NavLink to='/products/addToCart'><button onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>Add to Cart</button></NavLink></td>
+                     <td id='cartButton'>
+                         <a href='/products/addToCart'>
+                         {/* <Link to='/products/addToCart'> */}
+                            <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
+                                Add to Cart
+                            </button>
+                            </a>
+                         {/* </Link> */}
+                         </td>
                   </tr>
                     ))}
                 </tbody>

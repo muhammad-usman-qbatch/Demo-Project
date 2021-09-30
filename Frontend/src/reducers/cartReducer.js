@@ -6,7 +6,7 @@ export const addToCart = createAsyncThunk(
     async (product_id) => {
         try {
             console.log("cart api, parameter product id", product_id);
-            axios({
+           const response=  await axios({
                 method: "post",
                 url: "/products/addToCart",
                 data: JSON.stringify({
@@ -14,6 +14,7 @@ export const addToCart = createAsyncThunk(
                 }),
                 headers: { "Content-Type": "application/json" }
                 });
+                return response.data
         } catch (error) {
             console.log("Error",error);
         }
@@ -47,8 +48,12 @@ const cartsReducer= createSlice({
     },
     extraReducers:{
     [addToCart.fulfilled] : (state,action) => {
-            console.log("payload of cart", action.payload)
-            state.cartList = action.payload
+            console.log("payload of add_to_cart", action.payload)
+            // console.log('count of cart', action.payload.length);
+            return {
+                        ...state,
+                        cartList : action.payload
+                    }
             // state.count = action.payload.length
     },
     [addToCart.pending] : (state,action) => {
@@ -58,7 +63,7 @@ const cartsReducer= createSlice({
             state.loading = false
     },
     [getFromCart.fulfilled] : (state,action) => {
-        console.log("payload of cart", action.payload)
+        console.log("payload of get_from_cart", action.payload)
         state.cartList = action.payload
         state.count = action.payload.length
     },

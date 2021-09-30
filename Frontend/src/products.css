@@ -11,3 +11,7 @@ table, th, td {
 #cartButton {
   width: 8%;
 }
+
+#button {
+  cursor: pointer;
+}

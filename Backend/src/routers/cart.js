@@ -5,13 +5,13 @@ const CartStore = require('../models/cart');
 const ProductsStore = require("../models/products");
 
 router.post("/products/addToCart", async(req,res) => {
-    console.log("req.body", typeof req, req.body);
     try {
         const addProductsToCart = new CartStore(req.body);
-        console.log('1',req.body);
         let insertProductsToCart = await addProductsToCart.save();
+        console.log('insert_to_cart',insertProductsToCart)
         res.status(201).send(insertProductsToCart);
     } catch (error) {
+      console.log('error');
         res.status(400).send(error);
     }
 })
@@ -19,24 +19,6 @@ router.post("/products/addToCart", async(req,res) => {
 router.get("/cart", async(req,res) => {
     try {
         console.log('Cart get api')
-        // const cart = await db.CartStore.aggregate([
-        //     {
-        //         $lookup : {
-        //             from : 'ProductsStore',
-        //             localfield : 'p_id',
-        //             foreignfield : '_id',
-        //             as : 'cart_store'
-        //         }
-        //     }
-        // ])
-        // const cartStore = cart.find({})
-        // const getProductsFromCart = await CartStore.find({});
-        // console.log('getProducts from cart', getProductsFromCart);
-        // res.json({products: getProducts});
-        // res.json(getProductsFromCart);
-        // console.log('Cart',cart)
-        // res.json(cart);
-        // console.log('Cart Store', cartStore)
         await CartStore.aggregate([
             {
               "$project": {
