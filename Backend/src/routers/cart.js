@@ -4,21 +4,19 @@ const router = new express.Router();
 const CartStore = require('../models/cart');
 const ProductsStore = require("../models/products");
 
-router.post("/products/addToCart", async(req,res) => {
+router.post("/addToCart", async(req,res) => {
     try {
         const addProductsToCart = new CartStore(req.body);
         let insertProductsToCart = await addProductsToCart.save();
-        console.log('insert_to_cart',insertProductsToCart)
         res.status(201).send(insertProductsToCart);
     } catch (error) {
       console.log('error');
-        res.status(400).send(error);
+      res.status(400).send(error);
     }
 })
 
 router.get("/cart", async(req,res) => {
     try {
-        console.log('Cart get api')
         await CartStore.aggregate([
             {
               "$project": {
@@ -40,7 +38,6 @@ router.get("/cart", async(req,res) => {
             },
           ])
             .then((result) => {
-              console.log('result',result);
               res.json(result);
             })
             .catch((error) => {

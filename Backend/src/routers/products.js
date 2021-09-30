@@ -6,7 +6,6 @@ const ProductsStore = require('../models/products');
 router.post("/products", async(req,res) => {
     try {
         const addProducts = new ProductsStore(req.body);
-        console.log(req.body);
         let insertProducts = await addProducts.save();
         res.status(201).send(insertProducts);
     } catch (error) {
@@ -17,8 +16,6 @@ router.post("/products", async(req,res) => {
 router.get("/products", async(req,res) => {
     try {
         const getProducts = await ProductsStore.find({});
-        console.log('getProducts ', getProducts);
-        // res.json({products: getProducts});
         res.json(getProducts);
     } catch (error) {
         res.status(400).send(error);

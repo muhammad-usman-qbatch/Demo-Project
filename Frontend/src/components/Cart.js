@@ -9,7 +9,6 @@ export default function Cart() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        cartList = [];
         console.log("Fetching Products from cart")
         dispatch(getFromCart());
     },[])
@@ -31,7 +30,7 @@ export default function Cart() {
              </thead>
              <tbody>
              {cartList.map((product) => (
-               <tr key={product.p_id}>
+               <tr key={product._id}>
                   <td id='p_id'>{product.p_id}</td>
                   <td>{product.product_store.name}</td>
                   <td>{product.product_store.price}</td>

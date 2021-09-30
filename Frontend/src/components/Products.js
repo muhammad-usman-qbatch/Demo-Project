@@ -4,7 +4,7 @@ import { NavLink, Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
-import { addToCart } from '../reducers/cartReducer';
+import { addToCart, getFromCart } from '../reducers/cartReducer';
 
 export default function Products() {
 
@@ -15,11 +15,12 @@ export default function Products() {
     useEffect(() => {
         console.log("Fetching the Products:");
         dispatch(getProductsList());
-    },[count]);
+    },[]);
 
     const addToCart1 = (product_id) => {
         console.log("product id", typeof product_id, product_id)
         dispatch(addToCart(product_id));
+        dispatch(getFromCart());
     }
 
     return (
@@ -46,14 +47,10 @@ export default function Products() {
                      <td>{product.price}</td>
                      <td>{product.stock}</td>
                      <td id='cartButton'>
-                         <a href='/products/addToCart'>
-                         {/* <Link to='/products/addToCart'> */}
-                            <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
-                                Add to Cart
-                            </button>
-                            </a>
-                         {/* </Link> */}
-                         </td>
+                        <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
+                            Add to Cart
+                        </button>
+                     </td>
                   </tr>
                     ))}
                 </tbody>

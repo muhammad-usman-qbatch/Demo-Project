@@ -5,10 +5,9 @@ export const addToCart = createAsyncThunk(
     'addToCart',
     async (product_id) => {
         try {
-            console.log("cart api, parameter product id", product_id);
            const response=  await axios({
                 method: "post",
-                url: "/products/addToCart",
+                url: "/addToCart",
                 data: JSON.stringify({
                     "p_id" : product_id
                 }),
@@ -26,7 +25,6 @@ export const getFromCart = createAsyncThunk(
     async () => {
         try {
             let res = await axios.get("/cart");
-            console.log("create async thunk ",res);
             return res.data
         } catch (error) {
             console.log(error);

@@ -11,7 +11,6 @@ const App = () => {
             <Router>
             <Header />
                 <Switch>
-                  <Route exact path="/products/addToCart" component={Products} />
                   <Route exact path="/products" component={Products} />
                   <Route exact path="/cart" component={Cart} /> 
                   </Switch>     
