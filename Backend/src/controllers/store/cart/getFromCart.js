@@ -1,8 +1,6 @@
-const express = require('express');
-const CartStore = require('../../models/cart');
-const ProductsStore = require('../../models/products');
+const CartStore = require('../../../models/cart');
 
-const getFromCart = async(req,res) => {
+const gettingFromCart = async(req,res) =>{
     try {
         await CartStore.aggregate([
             {
@@ -34,3 +32,5 @@ const getFromCart = async(req,res) => {
         res.status(400).send(error);
     }
 };
+
+module.exports = gettingFromCart;

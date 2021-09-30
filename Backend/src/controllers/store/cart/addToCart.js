@@ -1,9 +1,8 @@
-const express = require('express');
-const CartStore = require('../../models/cart');
-const ProductsStore = require('../../models/products');
+const CartStore = require('../../../models/cart')
 
-const addToCart = async(req,res) => {
+const AddingToCart = async(req,res,next) => {
     try {
+      console.log('add to cart api');
         const addProductsToCart = new CartStore(req.body);
         let insertProductsToCart = await addProductsToCart.save();
         res.status(201).send(insertProductsToCart);
@@ -12,3 +11,5 @@ const addToCart = async(req,res) => {
       res.status(400).send(error);
     }
 };
+
+module.exports = AddingToCart;
