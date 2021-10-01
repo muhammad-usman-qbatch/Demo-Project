@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM  from "react-dom";
 import App from "./App";
-import {configureStore} from '@reduxjs/toolkit';
-import {Provider} from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
 import productsReducer from './reducers/productReducer';
 import cartsReducer from './reducers/cartReducer'
 import logger from 'redux-logger';

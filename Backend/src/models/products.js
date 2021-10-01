@@ -1,4 +1,3 @@
-import express from 'express'
 import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema({
@@ -17,4 +16,4 @@ const productSchema = new mongoose.Schema({
 });
 
 const ProductsStore = new mongoose.model("ProductStore", productSchema);
-module.exports = ProductsStore;
+export default ProductsStore;

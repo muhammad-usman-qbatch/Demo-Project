@@ -39,5 +39,5 @@ const productsReducer= createSlice({
     }
 });
 
-export const {getCount} = productsReducer.actions
+// export const {getCount} = productsReducer.actions
 export default productsReducer.reducer

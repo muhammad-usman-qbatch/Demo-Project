@@ -9,7 +9,6 @@ export default function Cart() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("Fetching Products from cart")
         dispatch(getFromCart());
     },[])
 

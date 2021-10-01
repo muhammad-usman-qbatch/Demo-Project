@@ -1,3 +1,3 @@
-export {addingProducts} from './addProducts';
-export {gettingProducts} from './getProducts';
+export { addingProducts } from './addProducts';
+export { gettingProducts } from './getProducts';
 

@@ -1,4 +1,3 @@
-import express from 'express'
 import mongoose from 'mongoose';
 
 const cartSchema = new mongoose.Schema({
@@ -9,4 +8,4 @@ const cartSchema = new mongoose.Schema({
 });
 
 const CartStore = new mongoose.model("CartStore", cartSchema);
-module.exports = CartStore;
+export default CartStore;

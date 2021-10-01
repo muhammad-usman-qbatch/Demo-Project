@@ -1,5 +1,5 @@
 import express from 'express';
-import {AddingToCart} from '../controllers/store/cart/addToCart';
+import { AddingToCart } from '../controllers/store/cart/addToCart';
 import { gettingFromCart } from '../controllers/store/cart/getFromCart';
 import { gettingProducts } from '../controllers/store/product/getProducts';
 import { addingProducts } from '../controllers/store/product/addProducts';

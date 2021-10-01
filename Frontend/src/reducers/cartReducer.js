@@ -5,7 +5,7 @@ export const addToCart = createAsyncThunk(
     'addToCart',
     async (product_id) => {
         try {
-           const response=  await axios({
+           const response = await axios({
                 method: "post",
                 url: "/store/addToCart",
                 data: JSON.stringify({
@@ -46,13 +46,8 @@ const cartsReducer= createSlice({
     },
     extraReducers:{
     [addToCart.fulfilled] : (state,action) => {
-            console.log("payload of add_to_cart", action.payload)
-            // console.log('count of cart', action.payload.length);
-            return {
-                        ...state,
-                        cartList : action.payload
-                    }
-            // state.count = action.payload.length
+            state.cartList = action.payload;
+            state.count = action.payload.length
     },
     [addToCart.pending] : (state,action) => {
             state.loading = true
@@ -61,7 +56,6 @@ const cartsReducer= createSlice({
             state.loading = false
     },
     [getFromCart.fulfilled] : (state,action) => {
-        console.log("payload of get_from_cart", action.payload)
         state.cartList = action.payload
         state.count = action.payload.length
     },

@@ -1,7 +1,6 @@
 import React from 'react';
 import '../products.css';
-import { NavLink, Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
@@ -13,12 +12,10 @@ export default function Products() {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        console.log("Fetching the Products:");
         dispatch(getProductsList());
     },[]);
 
     const addToCart1 = (product_id) => {
-        console.log("product id", typeof product_id, product_id)
         dispatch(addToCart(product_id));
         dispatch(getFromCart());
     }

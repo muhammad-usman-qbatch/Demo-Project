@@ -1,4 +1,3 @@
-import express from 'express';
 import ProductsStore from '../../../models/products';
 
 exports.gettingProducts = async(req,res) => {

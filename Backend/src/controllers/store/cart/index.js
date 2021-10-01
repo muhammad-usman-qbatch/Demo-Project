@@ -1,2 +1,2 @@
-export {AddingToCart} from './addToCart';
-export {gettingFromCart} from './getFromCart';
+export { AddingToCart } from './addToCart';
+export { gettingFromCart } from './getFromCart';
