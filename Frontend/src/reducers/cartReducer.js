@@ -13,6 +13,7 @@ export const addToCart = createAsyncThunk(
                 }),
                 headers: { "Content-Type": "application/json" }
                 });
+                alert('The Product has added.');
                 return response.data
         } catch (error) {
             console.log("Error",error);

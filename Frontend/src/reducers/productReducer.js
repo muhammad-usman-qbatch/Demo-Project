@@ -12,6 +12,17 @@ export const getProductsList = createAsyncThunk(
         }
     }
 );
+export const getProductsdetail = createAsyncThunk(
+    'getProductsList',
+    async () => {
+        try {
+            let res = await axios.get("/store/products/details/");
+            return res.data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+);
 
 const productsReducer= createSlice({
     name : 'Products',

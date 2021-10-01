@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getFromCart } from "../reducers/cartReducer";
+import '../products.css';
 
 export default function Cart() {
 
@@ -14,10 +15,8 @@ export default function Cart() {
 
     return (
         <div>
-        <h1>Cart Count</h1>
-        <p>{count}</p>
-        <h1>Cart List Length</h1>
-        <p>{cartList.length}</p>
+        <h2>Products in Cart</h2>
+        <p id='count'>{count}</p>
         <h1>Cart Detail</h1>
          <table>
              <thead>

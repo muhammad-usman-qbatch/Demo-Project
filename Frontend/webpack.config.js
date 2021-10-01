@@ -10,9 +10,10 @@ module.exports = {
   mode : 'development',
   entry : ['babel-polyfill',path.resolve(__dirname, './src/index.js')],
   output : {
-      filename : 'bundle.[hash].js',
+      filename : '[name].[hash].js',
       path: path.resolve(__dirname, "dist"),
       publicPath: "/",
+      pathinfo : false
   },
   devtool: 'inline-source-map',
   module: {

@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
+import { Link, Route } from 'react-router-dom';
+import ProductDetail from './productDetail';
 
 export default function Products() {
 
@@ -22,27 +24,21 @@ export default function Products() {
 
     return (
         <div>
-           <h1>Products Count</h1>
-           <p>{count}</p>
-           <h1>Products List Length</h1>
-           <p>{productsList.length}</p>
+           <h2>Total Products</h2>
+           <p id='count'>{count}</p>
            <h1>Products Detail</h1>
             <table>
                 <thead>
                     <tr>
                         <th style={{width: '30%'}}>ID</th>
                         <th style={{width: '11%'}}>Name</th>
-                        <th style={{width: '11%'}}>Price</th>
-                        <th style={{width: '10%'}}>Stock</th>
                     </tr>
                 </thead>
                 <tbody>
                 {productsList.map((product) => (
                   <tr key={product._id}>
                      <td id='p_id'>{product._id}</td>
-                     <td>{product.name}</td>
-                     <td>{product.price}</td>
-                     <td>{product.stock}</td>
+                     <td><Link to={`/products/productDetails/${product._id}`} id='underLine'>{product.name}</Link></td>
                      <td id='cartButton'>
                         <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
                             Add to Cart
@@ -52,6 +48,8 @@ export default function Products() {
                     ))}
                 </tbody>
             </table>
+            <Route path="/products/productDetails/:p_id" component={ProductDetail} />
+            <marquee><p>Click on the Product Name to see the Product Detail :)</p></marquee>
         </div>
     )
 };
