@@ -1,10 +1,8 @@
-const express = require('express');
+import express from 'express';
 const Router = express.Router();
-const store = require('./store');
 
-Router.post("/store", (req,res, next) => {
-    console.log('in stores');
-    next()
-}, store);
+import store from './store';
 
-module.exports = Router;
+Router.use("/store", store);
+
+export default Router;

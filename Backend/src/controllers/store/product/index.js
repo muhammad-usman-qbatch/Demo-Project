@@ -1,4 +1,3 @@
-const {addingProducts} = require('./addProducts');
-const {gettingProducts} = require('./getProducts');
+export {addingProducts} from './addProducts';
+export {gettingProducts} from './getProducts';
 
-module.exports = {addingProducts, gettingProducts};

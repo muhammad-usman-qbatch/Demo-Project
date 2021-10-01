@@ -1,11 +1,17 @@
-const express = require('express');
+import express from 'express';
+import {AddingToCart} from '../controllers/store/cart/addToCart';
+import { gettingFromCart } from '../controllers/store/cart/getFromCart';
+import { gettingProducts } from '../controllers/store/product/getProducts';
+import { addingProducts } from '../controllers/store/product/addProducts';
+
 const Router = express.Router();
 
-//const {addingToCart, gettingFromCart} = require('../controllers/store/cart');
-console.log('store.js');
-const AddingToCart = require('../controllers/store/cart/addToCart');
-Router.post('/addToCart', (req, res) => {
-    console.log('store123.js', req);
+// cart related requests
+Router.post('/addToCart', AddingToCart);
+Router.get('/cart', gettingFromCart);
 
-});
-module.exports = Router;
+// product related requests
+Router.post('/products', addingProducts)
+Router.get('/products', gettingProducts)
+
+export default Router;

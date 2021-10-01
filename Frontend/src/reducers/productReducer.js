@@ -5,7 +5,7 @@ export const getProductsList = createAsyncThunk(
     'getProductsList',
     async () => {
         try {
-            let res = await axios.get("/products");
+            let res = await axios.get("/store/products");
             return res.data
         } catch (error) {
             console.log(error);

@@ -1,7 +1,7 @@
-const express = require('express');
-const ProductsStore = require('../../../models/products');
+import express from 'express';
+import ProductsStore from '../../../models/products';
 
-const addingProducts = async(req,res) => {
+exports.addingProducts = async(req,res) => {
     try {
         const addProducts = new ProductsStore(req.body);
         let insertProducts = await addProducts.save();
@@ -10,5 +10,3 @@ const addingProducts = async(req,res) => {
         res.status(400).send(error);
     }
 };
-
-export default addingProducts;

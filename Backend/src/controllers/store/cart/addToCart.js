@@ -1,6 +1,6 @@
-const CartStore = require('../../../models/cart')
+import CartStore from '../../../models/cart';
 
-const AddingToCart = async(req,res,next) => {
+exports.AddingToCart = async(req,res) => {
     try {
       console.log('add to cart api');
         const addProductsToCart = new CartStore(req.body);
@@ -11,5 +11,3 @@ const AddingToCart = async(req,res,next) => {
       res.status(400).send(error);
     }
 };
-
-module.exports = AddingToCart;

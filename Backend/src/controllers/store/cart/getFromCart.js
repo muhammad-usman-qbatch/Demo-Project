@@ -1,6 +1,6 @@
-const CartStore = require('../../../models/cart');
+import CartStore from '../../../models/cart';
 
-const gettingFromCart = async(req,res) =>{
+exports.gettingFromCart = async(req,res) =>{
     try {
         await CartStore.aggregate([
             {
@@ -32,5 +32,3 @@ const gettingFromCart = async(req,res) =>{
         res.status(400).send(error);
     }
 };
-
-module.exports = gettingFromCart;

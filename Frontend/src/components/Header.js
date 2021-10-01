@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Products from "./Products";
+import Products from "../Pages/Products";
 import Cart from "./Cart";
 
 function Header() {

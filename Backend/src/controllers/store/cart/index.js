@@ -1,5 +1,2 @@
-const {addingToCart} = require('./addToCart');
-const {gettingFromCart} = require('./getFromCart');
-
-module.exports = {addingToCart:addingToCart, 
-    gettingFromCart:gettingFromCart};
+export {AddingToCart} from './addToCart';
+export {gettingFromCart} from './getFromCart';

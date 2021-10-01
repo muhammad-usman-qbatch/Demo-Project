@@ -1,21 +1,15 @@
-const express = require("express");
+import express from "express";
+import ProductsStore from '../src/models/products';
+import cors from 'cors';
+import Router from './routes';
 const app = express();
-// const cors = require("cors");
-const router = require('./routes')
 
 require("../src/db/conn")
-const ProductsStore = require('../src/models/products');
+
 app.use(express.json());
-// app.use(cors());
-// const router = require('./routers/products')
-// const cartRouter = require('./routers/cart')
-console.log('app.js', router);
+app.use(cors());
 const port = process.env.PORT || 4000;
-app.use("/", router);
-// app.use(app.router);
-// routes.initialize(app);
-
-
+app.use("/", Router);
 
 app.listen(port, () => {
     console.log(`connection is live at port : ${port}`);

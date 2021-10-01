@@ -1,7 +1,7 @@
-const express = require('express');
-const ProductsStore = require('../../../models/products');
+import express from 'express';
+import ProductsStore from '../../../models/products';
 
-const gettingProducts = async(req,res) => {
+exports.gettingProducts = async(req,res) => {
     try {
         const getProducts = await ProductsStore.find({});
         res.json(getProducts);
@@ -9,5 +9,3 @@ const gettingProducts = async(req,res) => {
         res.status(400).send(error);
     }
 };
-
-export default gettingProducts;
