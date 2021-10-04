@@ -6,11 +6,13 @@ import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
 import { Link, Route } from 'react-router-dom';
 import ProductDetail from './productDetail';
+import { useRouteMatch } from 'react-router';
 
 export default function Products() {
+    
+    const {url,path} = useRouteMatch();
 
     const {count, productsList} = useSelector((state) => state.productsReducer);
-
     const dispatch = useDispatch();
     
     useEffect(() => {
@@ -38,7 +40,7 @@ export default function Products() {
                 {productsList.map((product) => (
                   <tr key={product._id}>
                      <td id='p_id'>{product._id}</td>
-                     <td><Link to={`/products/productDetails/${product._id}`} id='underLine'>{product.name}</Link></td>
+                     <td><Link to={`${path}/${product._id}`} id='underLine'>{product.name}</Link></td>
                      <td id='cartButton'>
                         <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
                             Add to Cart
@@ -48,7 +50,7 @@ export default function Products() {
                     ))}
                 </tbody>
             </table>
-            <Route path="/products/productDetails/:p_id" component={ProductDetail} />
+            <Route path={`${url}/:p_id`} component={ProductDetail} />
             <marquee><p>Click on the Product Name to see the Product Detail :)</p></marquee>
         </div>
     )

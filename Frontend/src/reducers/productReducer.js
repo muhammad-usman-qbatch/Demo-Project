@@ -13,10 +13,10 @@ export const getProductsList = createAsyncThunk(
     }
 );
 export const getProductsdetail = createAsyncThunk(
-    'getProductsList',
-    async () => {
+    'getProductDescription',
+    async (p_id) => {
         try {
-            let res = await axios.get("/store/products/details/");
+            let res = await axios.get(`/store/products/details/${p_id.id}`); 
             return res.data
         } catch (error) {
             console.log(error);
@@ -29,6 +29,7 @@ const productsReducer= createSlice({
     initialState: {
         count : 0,
         productsList : [],
+        product_description:{},
         loading: false
     },
     reducers : {
@@ -47,6 +48,15 @@ const productsReducer= createSlice({
         [getProductsList.rejected] : (state, action) => {
             state.loading = false
         },
+        [getProductsdetail.fulfilled] : (state, action) => {
+            state.product_description = action.payload
+        },
+        [getProductsdetail.pending] : (state, action) => {
+            state.loading = true
+        },
+        [getProductsdetail.rejected] : (state, action) => {
+            state.loading = false
+        }
     }
 });
 
