@@ -6,7 +6,7 @@ import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
 import { Link, Route } from 'react-router-dom';
 import ProductDetail from './productDetail';
-import { Redirect, useRouteMatch } from 'react-router';
+import { useRouteMatch } from 'react-router';
 
 export default function Products() {
     
@@ -40,7 +40,7 @@ export default function Products() {
                 {productsList.map((product) => (
                   <tr key={product._id}>
                      <td id='p_id'>{product._id}</td>
-                     <td><Link to={`${path}/${product._id}`} id='underLine'>{product.name}</Link></td>
+                     <td><Link to={`${path}/${product._id}`} id='underLineTable'>{product.name}</Link></td>
                      <td id='cartButton'>
                         <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
                             Add to Cart
