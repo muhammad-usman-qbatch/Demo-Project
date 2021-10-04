@@ -16,17 +16,17 @@ export default function ProductDetail() {
 
     return (
         <div>
-            <h1>Product Details render here.</h1>
-            <h2>Product ID</h2>
+            <h1>Product Details :</h1>
+            <h2>ID</h2>
             {product_description._id}
             <p></p>
-            <h2>Product Name</h2>
+            <h2>Name</h2>
             {product_description.name}
             <p></p>
-            <h2>Product Price</h2>
+            <h2>Price</h2>
             {product_description.price}
             <p></p>
-            <h2>Product Description</h2>
+            <h2>Description</h2>
             {product_description.description}
             <p></p>
         </div>

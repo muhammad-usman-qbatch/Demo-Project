@@ -28,7 +28,7 @@ export default function Products() {
         <div>
            <h2>Total Products</h2>
            <p id='count'>{count}</p>
-           <h1>Products Detail</h1>
+           <h1>Products :</h1>
             <table>
                 <thead>
                     <tr>
