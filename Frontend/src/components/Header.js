@@ -19,10 +19,11 @@ function Header() {
          <NavLink to='/cart' id='underLine'><Navbar.Brand>Cart</Navbar.Brand></NavLink>
          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
          <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="mr-auto">
-      <Link to='/login' id='underLine'><Navbar.Brand>Login</Navbar.Brand></Link> 
-      <Link to='/SignUp' id='underLine'><Navbar.Brand>Sign Up</Navbar.Brand></Link> 
-    </Nav>
+
+         <Nav className="mr-auto">
+            <Link to='/login' id='underLine'><Navbar.Brand>Login</Navbar.Brand></Link> 
+            <Link to='/SignUp' id='underLine'><Navbar.Brand>Sign Up</Navbar.Brand></Link> 
+         </Nav>
   </Navbar.Collapse>
 </Navbar>
       </>
