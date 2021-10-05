@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const cartSchema = new mongoose.Schema({
     p_id : {
         type : String,
