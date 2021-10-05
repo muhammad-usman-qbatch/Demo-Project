@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
-mongoose.connect("mongodb://localhost:27017/products_store",
+const uri = process.env.MONGO_URI;
+mongoose.connect(uri,
     {
         socketTimeoutMS: 30000,
         keepAlive: true,
