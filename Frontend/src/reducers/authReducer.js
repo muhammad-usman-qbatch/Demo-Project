@@ -80,6 +80,7 @@ const authReducer = createSlice({
         },
         [signInUser.fulfilled] : (state,action) => {
             state.loading = false;
+            console.log('payload',action.payload);
             state.token = action.payload.token;
             state.feedback = "";
         },

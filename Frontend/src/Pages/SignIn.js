@@ -20,8 +20,11 @@ export default function SignIn() {
       email,
       password
     }
-    const authenticate = () => {
-        dispatch(signInUser(user));
+    const authenticate = async () => {
+        const res = await dispatch(signInUser(user));
+        const {payload} = res || {};
+        console.log('token', payload.token);
+        
     }
     return (
         <>

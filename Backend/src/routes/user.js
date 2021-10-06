@@ -10,7 +10,7 @@ const Router = express.Router();
 Router.post('/SignUp', AddingUsers);
 Router.post('/SignIn', loginUser);
 Router.get('/welcome',requireLogin,(req,res)=>{
-    res.json({hello:`Hello how r u ? ${req.user.email}`});
+    res.json({hello:`Hello how r u ? ${req.user.email.slice(0,5)}`});
 })
 
 export default Router;
