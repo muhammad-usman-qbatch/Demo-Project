@@ -20,12 +20,13 @@ export default function Products() {
         dispatch(getProductsList());
     },[]);
   
-    const addToCart1 = (product_id) => {
+    const addToCart1 = async (product_id,name,price, tokenCookie) => {
         if(!tokenCookie){
             return history.push('/SignIn');
         }
-        dispatch(addToCart(product_id));
-        dispatch(getFromCart());
+        console.log("heloo here token ..." , tokenCookie)
+        await dispatch(addToCart({product_id, name, price, tokenCookie}));
+        await dispatch(getFromCart({tokenCookie}));
     }
 
     return (
@@ -46,7 +47,7 @@ export default function Products() {
                      <td id='p_id'>{product._id}</td>
                      <td><Link to={`${path}/${product._id}`} id='underLineTable'>{product.name}</Link></td>
                      <td id='cartButton'>
-                        <button id='button' onClick = {()=>addToCart1(product._id)} disabled={!product.stock}>
+                        <button id='button' onClick = {()=>addToCart1(product._id, product.name, product.price, tokenCookie)} disabled={!product.stock}>
                             Add to Cart
                         </button>
                      </td>

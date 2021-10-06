@@ -3,15 +3,20 @@ import axios from '../config/axios';
 
 export const addToCart = createAsyncThunk(
     'addToCart',
-    async (product_id) => {
+    async (data, getState, thunkAPI) => {
         try {
            const response = await axios({
                 method: "post",
                 url: "/store/addToCart",
                 data: JSON.stringify({
-                    "p_id" : product_id
+                    "p_id" : data.product_id,
+                    "name" : data.name,
+                    "price" : data.price
                 }),
-                headers: { "Content-Type": "application/json" }
+                headers: {
+                    "Content-Type" : "application/json",
+                    "Authorization": `Bearer ${data.tokenCookie}`
+                }
                 });
                 alert('The Product has added.');
                 return response.data
@@ -23,9 +28,15 @@ export const addToCart = createAsyncThunk(
 
 export const getFromCart = createAsyncThunk(
     'getCartList',
-    async () => {
+    async (data, getState, thunkAPI) => {
         try {
-            let res = await axios.get("/store/cart");
+            console.log('token sending from get request', data.tokenCookie)
+            let res = await axios({
+                method : "get",
+                url : "/store/cart",
+                headers: {"Authorization": `Bearer ${data.tokenCookie}`}
+            })
+            console.log('get from cart response', res.data)
             return res.data
         } catch (error) {
             console.log(error);
@@ -47,6 +58,7 @@ const cartsReducer= createSlice({
     },
     extraReducers:{
     [addToCart.fulfilled] : (state,action) => {
+        console.log('add to cart', action.payload)
             state.cartList = action.payload;
             state.count = action.payload.length
     },
@@ -57,8 +69,9 @@ const cartsReducer= createSlice({
             state.loading = false
     },
     [getFromCart.fulfilled] : (state,action) => {
+        console.log('get from cart', action.payload)
         state.cartList = action.payload
-        state.count = action.payload.length
+        state.count = state.cartList.length;
     },
     [getFromCart.pending] : (state,action) => {
         state.loading = true

@@ -4,23 +4,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFromCart } from "../reducers/cartReducer";
 import '../products.css';
 import { addToken } from "../reducers/authReducer";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router";
 import Cookies from "js-cookie";
 export default function Cart() {
 
     let {count, cartList} = useSelector((state) => state.cartsReducer);
     let {token} = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
+    const history = useHistory();
     const tokenCookie = Cookies.get('token')
-    if(!tokenCookie && !token){
-        return <Redirect to='/SignIn' />
-    }
+    console.log('get api token', tokenCookie);
+
     if(!token){
         dispatch(addToken(tokenCookie));
     }
 
     useEffect(() => {
-        dispatch(getFromCart());
+        if(!tokenCookie){
+            return history.push('/SignIn')
+        }
+        dispatch(getFromCart({tokenCookie}));
     },[])
 
     return (
@@ -40,8 +43,8 @@ export default function Cart() {
              {cartList.map((product) => (
                <tr key={product._id}>
                   <td id='p_id'>{product.p_id}</td>
-                  <td>{product.product_store.name}</td>
-                  <td>{product.product_store.price}</td>
+                  <td>{product.detail.name}</td>
+                  <td>{product.detail.price}</td>
                </tr>
                  ))}
              </tbody>
