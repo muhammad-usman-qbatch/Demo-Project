@@ -5,8 +5,9 @@ import jwt from 'jsonwebtoken';
 exports.loginUser = async(req,res) => {
     try {
         const {email, password} = req.body;
+        console.log('body', req.body);
         if (!(email && password)){
-            res.status(400).json({error:"ALL fields are required."})
+            return res.status(400).json({error:"ALL fields are required."})
         }
 
         //email checking whether it matches or not
@@ -22,7 +23,7 @@ exports.loginUser = async(req,res) => {
                 );
                 res.status(201).json({token});
         } else{
-            res.status(401).json({error:"email or password is incorrect."})
+            return res.status(401).json({error:"email or password is incorrect."})
         }
     } catch (error) {
         res.status(400).send(error);

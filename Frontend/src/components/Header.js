@@ -21,7 +21,7 @@ function Header() {
          <Navbar.Collapse id="responsive-navbar-nav">
 
          <Nav className="mr-auto">
-            <Link to='/login' id='underLine'><Navbar.Brand>Login</Navbar.Brand></Link> 
+            <Link to='/SignIn' id='underLine'><Navbar.Brand>Login</Navbar.Brand></Link> 
             <Link to='/SignUp' id='underLine'><Navbar.Brand>Sign Up</Navbar.Brand></Link> 
          </Nav>
   </Navbar.Collapse>

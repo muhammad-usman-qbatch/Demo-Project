@@ -4,9 +4,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route,useRouteMatch } from 'react-router-dom';
 import ProductDetail from './productDetail';
-import { useRouteMatch } from 'react-router';
 
 export default function Products() {
     

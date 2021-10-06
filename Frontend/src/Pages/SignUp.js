@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useHistory } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {signUpUser} from '../reducers/authReducer';
 
 export default function SignUp() {
@@ -10,7 +10,8 @@ export default function SignUp() {
      const [last_name, setln] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
-    //  const [auth, setAuth] = useState('SignIn');
+  
+     const {feedback} = useSelector((state) => state.authReducer);
      const dispatch = useDispatch();
      const history = useHistory();
 
@@ -27,6 +28,7 @@ export default function SignUp() {
          console.log("SIGN UP123");
          dispatch(signUpUser(user));
      }
+
      return (
          <>
         <div className="row">
@@ -48,8 +50,11 @@ export default function SignUp() {
           <input id="password" placeholder="Password" type="password" className="validate" value={password} onChange={(e)=>setPassword(e.target.value)}/>
         </div>
       </div>
-          <h6 onClick={()=>setComponent()}>Already have an account ?</h6>
-      <button className="waves-effect waves-light btn" onClick={()=>registration()}>Sign Up</button>
+          <h6 onClick={()=>setComponent()} id='h6-onhover'>Already have an account ?</h6>
+      <div>
+      <button className="waves-effect waves-light btn" onClick={()=>registration()}>Sign Up</button><br/>
+      <center><p id='shadow'>{feedback}</p></center>
+      </div>
   </div>
          </>
      )

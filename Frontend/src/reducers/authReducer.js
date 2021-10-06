@@ -30,6 +30,32 @@ export const signUpUser = createAsyncThunk(
             });
           }
     }
+);
+
+export const signInUser = createAsyncThunk(
+    'SignInUser',
+    async(body, thunkAPI) => {
+        try {
+            const res = await axios({
+                method: "post",
+                url: "/auth/SignIn",
+                data: JSON.stringify(body),
+                headers: {"Content-Type": "application/json"}
+            });
+            return res.data
+        } catch (error) {
+            const err = error;
+            if (err.response){
+                return thunkAPI.rejectWithValue({
+                    error : err.response.data.error,
+                    status : err.response.status
+                });
+            }
+            return thunkAPI.rejectWithValue({
+                error : "Network error"
+            });
+        }
+    }
 )
 
 const authReducer = createSlice({
@@ -49,6 +75,18 @@ const authReducer = createSlice({
             state.loading = true;
         },
         [signUpUser.rejected] : (state,action) => {
+            state.feedback = action.payload.error
+            state.loading = false;
+        },
+        [signInUser.fulfilled] : (state,action) => {
+            state.loading = false;
+            state.token = action.payload.token;
+            state.feedback = "";
+        },
+        [signInUser.pending] : (state,action) => {
+            state.loading = true;
+        },
+        [signInUser.rejected] : (state,action) => {
             state.feedback = action.payload.error
             state.loading = false;
         }
