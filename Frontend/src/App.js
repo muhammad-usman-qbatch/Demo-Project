@@ -8,6 +8,7 @@ import SignIn from "./Pages/SignIn";
 // import productDetail from "./Pages/productDetail";
 
 const App = () => {
+
     return (    
         <div> 
             <Router>

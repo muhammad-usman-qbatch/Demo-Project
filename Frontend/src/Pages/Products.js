@@ -4,21 +4,26 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
-import { Link, Route,useRouteMatch } from 'react-router-dom';
+import { Link, Route,useRouteMatch, Redirect } from 'react-router-dom';
 import ProductDetail from './productDetail';
-
+import Cookies from 'js-cookie';
+import { useHistory } from 'react-router';
 export default function Products() {
     
     const {url,path} = useRouteMatch();
 
     const {count, productsList} = useSelector((state) => state.productsReducer);
     const dispatch = useDispatch();
-    
+    const history = useHistory();
+    const tokenCookie = Cookies.get('token');
     useEffect(() => {
         dispatch(getProductsList());
     },[]);
-
+  
     const addToCart1 = (product_id) => {
+        if(!tokenCookie){
+            return history.push('/SignIn');
+        }
         dispatch(addToCart(product_id));
         dispatch(getFromCart());
     }

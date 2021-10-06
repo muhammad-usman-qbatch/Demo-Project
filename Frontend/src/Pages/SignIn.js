@@ -3,14 +3,16 @@ import { useHistory } from 'react-router';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInUser} from '../reducers/authReducer';
+import { useCookies } from 'react-cookie';
 
 export default function SignIn() {
 
     const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [cookie, setCookie] = useCookies(['token']);
 
-    const {token, feedback} = useSelector((state) => state.authReducer);
+    const {feedback} = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
 
     const setComponent = () => {
@@ -22,9 +24,10 @@ export default function SignIn() {
     }
     const authenticate = async () => {
         const res = await dispatch(signInUser(user));
-        const {payload} = res || {};
+        const { payload } = res || {};
         console.log('token', payload.token);
-        
+        setCookie('token', payload.token);
+        return history.push('/products')
     }
     return (
         <>

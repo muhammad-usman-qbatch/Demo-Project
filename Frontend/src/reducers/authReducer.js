@@ -1,5 +1,6 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from '../config/axios';
+import Cookies from "js-cookie";
 
 export const signUpUser = createAsyncThunk(
     'SignUpUser',
@@ -65,7 +66,12 @@ const authReducer = createSlice({
         feedback: "",
         loading:false
     },
-    reducers:{},
+    reducers:{
+        addToken : (state, action) => {
+            console.log('addtoken action pyalod', action.payload)
+            state.token = action.payload;
+        }
+    },
     extraReducers:{
         [signUpUser.fulfilled] : (state,action) => {
             state.loading = false;
@@ -93,5 +99,5 @@ const authReducer = createSlice({
         }
     }
 });
-
+export const {addToken} = authReducer.actions;
 export default authReducer.reducer;
