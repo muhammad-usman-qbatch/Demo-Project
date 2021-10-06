@@ -2,32 +2,29 @@ import CartStore from '../../../models/cart';
 
 exports.gettingFromCart = async(req,res) =>{
     try {
-        await CartStore.aggregate([
-            {
-              "$project": {
-                "p_id": {
-                  "$toObjectId": "$p_id"
-                }
-              }
-            },
-            {
-              $lookup: {
-                from: 'productstores',
-                localField: 'p_id',
-                foreignField: '_id',
-                as: "product_store"
-              }
-            },
-            {
-                $unwind: "$product_store",
-            },
-          ])
-            .then((result) => {
-              res.json(result);
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+        let id = req.user.user_id;
+        const getCart = await CartStore.find({user_id : id})
+        console.log('get cart', getCart)
+        res.json(getCart);
+        // await CartStore.aggregate([
+        //     {
+        //       $lookup: {
+        //         from: 'users',
+        //         localField: 'user_id',
+        //         foreignField: '_id',
+        //         as: "cart_store"
+        //       }
+        //     },
+        //     {
+        //         $unwind: "$cart_store",
+        //     },
+        //   ])
+        //     .then((result) => {
+        //       res.json(result);
+        //     })
+        //     .catch((error) => {
+        //       console.log(error);
+        //     });
     } catch (error) {
         res.status(400).send(error);
     }
