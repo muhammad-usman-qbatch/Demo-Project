@@ -6,20 +6,15 @@ export const signUpUser = createAsyncThunk(
     'SignUpUser',
     async (body , thunkAPI) =>{
         try {
-            console.log(body);
-            console.log("add user api");
             const res = await axios({
                 method: "post",
                 url: "/auth/SignUp",
                 data:JSON.stringify(body),
                 headers: { "Content-type" : "application/json" }
             });
-            console.log('SignUp User onli res',res);
-            console.log('SignUp User onli res.data',res.data);
             return res.data;
         } catch (error) {
             const err = error
-            console.log('err',err.response.data.error);
             if (err.response) {
               return thunkAPI.rejectWithValue({
                 error:   err.response.data.error,
@@ -68,7 +63,6 @@ const authReducer = createSlice({
     },
     reducers:{
         addToken : (state, action) => {
-            console.log('addtoken action pyalod', action.payload)
             state.token = action.payload;
         }
     },
@@ -86,7 +80,6 @@ const authReducer = createSlice({
         },
         [signInUser.fulfilled] : (state,action) => {
             state.loading = false;
-            console.log('payload',action.payload);
             state.token = action.payload.token;
             state.feedback = "";
         },

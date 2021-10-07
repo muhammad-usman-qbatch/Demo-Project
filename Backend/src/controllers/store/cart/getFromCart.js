@@ -3,9 +3,7 @@ import CartStore from '../../../models/cart';
 exports.gettingFromCart = async(req,res) =>{
     try {
         let id = req.user.user_id;
-        console.log('get from cart token id ', id)
         const getCart = await CartStore.find({user_id : id})
-        console.log('get cart', getCart)
         res.send(getCart);
         // await CartStore.aggregate([
         //     {

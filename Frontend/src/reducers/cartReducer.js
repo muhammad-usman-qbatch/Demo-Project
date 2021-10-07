@@ -30,13 +30,11 @@ export const getFromCart = createAsyncThunk(
     'getCartList',
     async (data, getState, thunkAPI) => {
         try {
-            console.log('token sending from get request', data.tokenCookie)
             let res = await axios({
                 method : "get",
                 url : "/store/cart",
                 headers: {"Authorization": `Bearer ${data.tokenCookie}`}
             })
-            console.log('get from cart response', res.data)
             return res.data
         } catch (error) {
             console.log(error);
@@ -58,7 +56,6 @@ const cartsReducer= createSlice({
     },
     extraReducers:{
     [addToCart.fulfilled] : (state,action) => {
-        console.log('add to cart', action.payload)
             state.cartList = action.payload;
             state.count = action.payload.length
     },
@@ -69,7 +66,6 @@ const cartsReducer= createSlice({
             state.loading = false
     },
     [getFromCart.fulfilled] : (state,action) => {
-        console.log('get from cart', action.payload)
         state.cartList = action.payload
         state.count = state.cartList.length;
     },

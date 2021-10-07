@@ -11,7 +11,7 @@ export default function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [cookie, setCookie] = useCookies(['token']);
-
+    const [message, setMessage] = useState('');
     const {feedback} = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
 
@@ -24,8 +24,11 @@ export default function SignIn() {
     }
     const authenticate = async () => {
         const res = await dispatch(signInUser(user));
+        setMessage(res.meta.requestStatus)
+         if(res.meta.requestStatus === 'rejected'){
+           return history.push('/SignIn');
+         }
         const { payload } = res || {};
-        console.log('token', payload.token);
         setCookie('token', payload.token);
         return history.push('/products')
     }
@@ -45,7 +48,10 @@ export default function SignIn() {
           <h6 onClick={()=>setComponent()} id='h6-onhover'>Dont have an account ?</h6>
       <div>
       <button className="waves-effect waves-light btn" onClick={()=>authenticate()}>Sign In</button><br/>
-      <center><p id='shadow'>{feedback}</p></center>
+      {
+        message === 'rejected' &&
+           <center><p id='shadow'>{feedback}</p></center>
+      }
       </div>
   </div>
          </>

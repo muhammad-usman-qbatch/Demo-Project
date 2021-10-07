@@ -5,13 +5,10 @@ exports.AddingUsers = async(req,res) => {
     try {
         const {first_name, last_name, email, password} = req.body;
 
-        console.log("email ," , email);
-
         if (!(first_name && last_name && email && password)){
             return res.status(400).json({error:"All fields are required."});
         }
         
-
         // email checking , that already taken or not
         const emailExist = await Users.findOne({ email });
         if (emailExist){

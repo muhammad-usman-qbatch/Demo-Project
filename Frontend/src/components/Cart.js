@@ -28,6 +28,9 @@ export default function Cart() {
 
     return (
         <div>
+            {
+                cartList.length>0 &&
+                <>
         <h2>Products in Cart</h2>
         <p id='count'>{count}</p>
         <h1>Cart Detail</h1>
@@ -49,6 +52,14 @@ export default function Cart() {
                  ))}
              </tbody>
          </table>
+         </>
+         }
+         {
+             cartList.length<=0 && 
+             <div id='padding'>
+             <center><h1 id='emptyCart'>Your Cart is empty</h1></center>
+             </div>
+         }
      </div>
     )
 }

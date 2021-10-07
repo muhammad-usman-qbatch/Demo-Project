@@ -1,32 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../products.css';
-import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProductsList } from '../reducers/productReducer';
 import { addToCart, getFromCart } from '../reducers/cartReducer';
-import { Link, Route,useRouteMatch, Redirect } from 'react-router-dom';
+import { Link, Route,useRouteMatch } from 'react-router-dom';
 import ProductDetail from './productDetail';
 import Cookies from 'js-cookie';
 import { useHistory } from 'react-router';
 export default function Products() {
     
     const {url,path} = useRouteMatch();
-
+    const [tokenCookie, setCookie] = useState();
     const {count, productsList} = useSelector((state) => state.productsReducer);
     const dispatch = useDispatch();
     const history = useHistory();
-    const tokenCookie = Cookies.get('token');
-    useEffect(() => {
+
+    useEffect(() => {  
         dispatch(getProductsList());
     },[]);
   
-    const addToCart1 = async (product_id,name,price, tokenCookie) => {
+    const addToCart1 = (product_id,name,price, tokenCookie) => {
+        tokenCookie = Cookies.get('token');
+        setCookie(tokenCookie);
         if(!tokenCookie){
             return history.push('/SignIn');
         }
-        console.log("heloo here token ..." , tokenCookie)
-        await dispatch(addToCart({product_id, name, price, tokenCookie}));
-        await dispatch(getFromCart({tokenCookie}));
+        dispatch(addToCart({product_id, name, price, tokenCookie}));
+        dispatch(getFromCart({tokenCookie}));
     }
 
     return (

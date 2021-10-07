@@ -10,7 +10,8 @@ export default function SignUp() {
      const [last_name, setln] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
-  
+     const[message, setMessage] = useState('');
+
      const {feedback} = useSelector((state) => state.authReducer);
      const dispatch = useDispatch();
      const history = useHistory();
@@ -24,9 +25,12 @@ export default function SignUp() {
          email,
          password
      }
-     const registration = () => {
-         console.log("SIGN UP123");
-         dispatch(signUpUser(user));
+     const registration = async () => {
+         const res = await dispatch(signUpUser(user));
+         setMessage(res.meta.requestStatus)
+         if(res.meta.requestStatus === 'rejected'){
+           return history.push('/SignUp');
+         }
      }
 
      return (
@@ -53,7 +57,10 @@ export default function SignUp() {
           <h6 onClick={()=>setComponent()} id='h6-onhover'>Already have an account ?</h6>
       <div>
       <button className="waves-effect waves-light btn" onClick={()=>registration()}>Sign Up</button><br/>
-      <center><p id='shadow'>{feedback}</p></center>
+      {
+        message === 'rejected' &&
+           <center><p id='shadow'>{feedback}</p></center>
+      }
       </div>
   </div>
          </>
