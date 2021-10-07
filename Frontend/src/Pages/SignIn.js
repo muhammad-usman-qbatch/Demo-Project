@@ -50,7 +50,7 @@ export default function SignIn() {
       <button className="waves-effect waves-light btn" onClick={()=>authenticate()}>Sign In</button><br/>
       {
         message === 'rejected' &&
-           <center><p id='shadow'>{feedback}</p></center>
+         <center><p id='shadow'>{feedback}</p></center>
       }
       </div>
   </div>

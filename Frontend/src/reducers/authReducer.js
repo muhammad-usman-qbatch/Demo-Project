@@ -1,6 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import axios from '../config/axios';
-import Cookies from "js-cookie";
 
 export const signUpUser = createAsyncThunk(
     'SignUpUser',

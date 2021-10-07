@@ -61,6 +61,10 @@ export default function SignUp() {
         message === 'rejected' &&
            <center><p id='shadow'>{feedback}</p></center>
       }
+      {
+        message === 'fulfilled' &&
+        <center><p id='shadow'>{feedback}</p></center>
+      }
       </div>
   </div>
          </>
