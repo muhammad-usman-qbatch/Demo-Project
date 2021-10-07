@@ -7,11 +7,13 @@ import { Link, Route,useRouteMatch } from 'react-router-dom';
 import ProductDetail from './productDetail';
 import Cookies from 'js-cookie';
 import { useHistory } from 'react-router';
+import Navbar from 'react-bootstrap/Navbar';
 export default function Products() {
     
     const {url,path} = useRouteMatch();
     const [tokenCookie, setCookie] = useState();
     const {count, productsList} = useSelector((state) => state.productsReducer);
+    const {cartList} = useSelector((state) => state.cartsReducer);
     const dispatch = useDispatch();
     const history = useHistory();
 
