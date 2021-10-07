@@ -9,14 +9,6 @@ const cartSchema = new mongoose.Schema({
     user_id : {
         type : ObjectId,
         ref : "Users"
-    },
-    detail :{
-        name : {
-            type: String
-        },
-        price : {
-            type: Number
-        }
     }
 });
 
