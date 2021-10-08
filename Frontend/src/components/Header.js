@@ -4,14 +4,15 @@ import '../header.css'
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Cookies from 'js-cookie';
-import { useSelector, useDispatch } from 'react-redux';
-import { getFromCart } from "../reducers/cartReducer";
-import { useEffect } from 'react';
 
 function Header() {
-
+    
     return (
+        // <div>        
+        //     <p id='onHover'><NavLink to='/products'>Products</NavLink></p>
+        //     <p id='onHover'><NavLink to='/cart'>Cart</NavLink></p>
+        // </div>
+
         <>
          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
          <NavLink to='/products' id='underLine'><Navbar.Brand>Products</Navbar.Brand></NavLink>
