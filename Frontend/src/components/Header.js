@@ -13,9 +13,10 @@ function Header() {
 
   const tokenCookie = Cookies.get('token');
   const dispatch = useDispatch();
-  const {count} = useSelector((state) => state.cartsReducer);
+  const {count, name} = useSelector((state) => state.cartsReducer);
 
   useEffect(() => {
+    console.log('get cart from header')
     dispatch(getFromCart({tokenCookie}))
   },[count]);
 
@@ -32,6 +33,7 @@ function Header() {
             <Link to='/SignUp' id='underLine'><Navbar.Brand>Sign Up</Navbar.Brand></Link> 
          </Nav>
          <Navbar.Brand id='right'>items in cart: {count} </Navbar.Brand>
+         {/* <Navbar.Brand id='pad'>Cart Owner {name} </Navbar.Brand> */}
   </Navbar.Collapse>
 </Navbar>
       </>

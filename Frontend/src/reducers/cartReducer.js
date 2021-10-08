@@ -5,13 +5,12 @@ export const addToCart = createAsyncThunk(
     'addToCart',
     async (data, getState, thunkAPI) => {
         try {
+            console.log('data', data);
            const response = await axios({
                 method: "post",
                 url: "/store/addToCart",
                 data: JSON.stringify({
-                    "p_id" : data.product_id,
-                    "name" : data.name,
-                    "price" : data.price
+                    "p_id" : data.product_id
                 }),
                 headers: {
                     "Content-Type" : "application/json",
@@ -19,6 +18,7 @@ export const addToCart = createAsyncThunk(
                 }
                 });
                 alert('The Product has added.');
+                console.log('add to cart response', response.data);
                 return response.data
         } catch (error) {
             console.log("Error",error);
@@ -35,10 +35,21 @@ export const getFromCart = createAsyncThunk(
                 url : "/store/cart",
                 headers: {"Authorization": `Bearer ${data.tokenCookie}`}
             })
+            console.log('get from cart response', res.data);
             return res.data
         } catch (error) {
-            console.log(error);
-        }
+            const err = error
+            if (err.response) {
+                console.log('error',err.response.data.error)
+              return thunkAPI.rejectWithValue({
+                error:   err.response.data.error,
+                status: err.response.status,
+              });
+            }
+            return thunkAPI.rejectWithValue({
+              error: "Network Error",
+            });
+          }
     }
 );
 
@@ -46,6 +57,7 @@ const cartsReducer= createSlice({
     name : 'Cart',
     initialState: {
         count : 0,
+        name:'',
         cartList : [],
         loading: false
     },
@@ -66,13 +78,19 @@ const cartsReducer= createSlice({
             state.loading = false
     },
     [getFromCart.fulfilled] : (state,action) => {
-        state.cartList = action.payload
+        console.log('get from cart paylad', action.payload.products.length)
+        state.name = action.payload.name
+        state.cartList = action.payload.products
+        console.log('cartList', state.cartList);
         state.count = state.cartList.length;
     },
     [getFromCart.pending] : (state,action) => {
         state.loading = true
     },
     [getFromCart.rejected] : (state,action) => {
+        console.log('rejected', action.payload)
+        state.cartList = [];
+        state.count = 0;
         state.loading = false
     }
 }

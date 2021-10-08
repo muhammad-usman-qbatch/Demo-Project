@@ -4,6 +4,12 @@ const {ObjectId} = mongoose.Types;
 exports.gettingFromCart = async(req,res) =>{
     try {
         let id = req.user.user_id;
+        console.log('get from cart api');
+        const checkCart = await CartStore.find({});
+        if (checkCart.length === 0){
+            console.log('checkcart', checkCart)
+            return res.status(401).json({error:"User not found."});
+        }
         await CartStore.aggregate([
             {
                 $lookup : {
@@ -43,7 +49,7 @@ exports.gettingFromCart = async(req,res) =>{
                 products
             }
             result = obj;
-            console.log('product', result)
+            console.log('get from cart res', result)
             res.json(result);
         })
         .catch((error) =>{

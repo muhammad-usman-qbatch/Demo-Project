@@ -7,13 +7,11 @@ import { Link, Route,useRouteMatch } from 'react-router-dom';
 import ProductDetail from './productDetail';
 import Cookies from 'js-cookie';
 import { useHistory } from 'react-router';
-import Navbar from 'react-bootstrap/Navbar';
 export default function Products() {
     
     const {url,path} = useRouteMatch();
     const [tokenCookie, setCookie] = useState();
     const {count, productsList} = useSelector((state) => state.productsReducer);
-    const {cartList} = useSelector((state) => state.cartsReducer);
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -21,13 +19,13 @@ export default function Products() {
         dispatch(getProductsList());
     },[]);
   
-    const addToCart1 = (product_id,name,price, tokenCookie) => {
+    const addToCart1 = (product_id,tokenCookie) => {
         tokenCookie = Cookies.get('token');
         setCookie(tokenCookie);
         if(!tokenCookie){
             return history.push('/SignIn');
         }
-        dispatch(addToCart({product_id, name, price, tokenCookie}));
+        dispatch(addToCart({product_id, tokenCookie}));
         dispatch(getFromCart({tokenCookie}));
     }
 
@@ -49,7 +47,7 @@ export default function Products() {
                      <td id='p_id'>{product._id}</td>
                      <td><Link to={`${path}/${product._id}`} id='underLineTable'>{product.name}</Link></td>
                      <td id='cartButton'>
-                        <button id='button' onClick = {()=>addToCart1(product._id, product.name, product.price, tokenCookie)} disabled={!product.stock}>
+                        <button id='button' onClick = {()=>addToCart1(product._id, tokenCookie)} disabled={!product.stock}>
                             Add to Cart
                         </button>
                      </td>
