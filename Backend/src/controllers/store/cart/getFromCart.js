@@ -1,9 +1,16 @@
 import mongoose  from 'mongoose';
 import CartStore from '../../../models/cart';
 const {ObjectId} = mongoose.Types;
-exports.gettingFromCart = async(req,res) =>{
+
+exports.gettingFromCart = async(req,res) => {
     try {
-        let id = req.user.user_id;
+        let user_id = req.user.user_id;
+        const userExist = CartStore.find(user_id).toString();
+        if(userExist){
+            console.log('user exist', typeof userExist);
+            return res.state(401).json({error:'user not found'});
+        }
+        console.log('outside of if');
         await CartStore.aggregate([
             {
                 $lookup : {
