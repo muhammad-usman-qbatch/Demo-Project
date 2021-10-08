@@ -8,7 +8,7 @@ import { useHistory } from "react-router";
 import Cookies from "js-cookie";
 export default function Cart() {
 
-    let {count, cartList, name} = useSelector((state) => state.cartsReducer);
+    let {count, cartList} = useSelector((state) => state.cartsReducer);
     let {token} = useSelector((state) => state.authReducer);
     const dispatch = useDispatch();
     const history = useHistory();
@@ -45,15 +45,13 @@ export default function Cart() {
              <tbody>
              {cartList.map((product) => (
                <tr key={product._id}>
-                  <td id='p_id'>{product._id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
+                  <td id='p_id'>{product.p_id}</td>
+                  <td>{product.detail.name}</td>
+                  <td>{product.detail.price}</td>
                </tr>
                  ))}
              </tbody>
          </table>
-         <h1>Cart Owner :</h1>
-         <h6>{name}</h6>
          </>
          }
          {

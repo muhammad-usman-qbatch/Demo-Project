@@ -19,13 +19,13 @@ export default function Products() {
         dispatch(getProductsList());
     },[]);
   
-    const addToCart1 = (product_id,tokenCookie) => {
+    const addToCart1 = (product_id,name,price, tokenCookie) => {
         tokenCookie = Cookies.get('token');
         setCookie(tokenCookie);
         if(!tokenCookie){
             return history.push('/SignIn');
         }
-        dispatch(addToCart({product_id, tokenCookie}));
+        dispatch(addToCart({product_id, name, price, tokenCookie}));
         dispatch(getFromCart({tokenCookie}));
     }
 
@@ -47,7 +47,7 @@ export default function Products() {
                      <td id='p_id'>{product._id}</td>
                      <td><Link to={`${path}/${product._id}`} id='underLineTable'>{product.name}</Link></td>
                      <td id='cartButton'>
-                        <button id='button' onClick = {()=>addToCart1(product._id, tokenCookie)} disabled={!product.stock}>
+                        <button id='button' onClick = {()=>addToCart1(product._id, product.name, product.price, tokenCookie)} disabled={!product.stock}>
                             Add to Cart
                         </button>
                      </td>
