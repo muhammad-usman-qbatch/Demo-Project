@@ -18,7 +18,7 @@ exports.AddingToCart = async(req,res) => {
             {
             cart : [
               {
-                products : p_id,
+                products : ObjectId(p_id),
                 quantity : 1
               }
             ],
@@ -37,7 +37,7 @@ exports.AddingToCart = async(req,res) => {
             console.log('product exist ', productExist)
             const addProduct = await CartStore.updateOne(
               {'user_id':ObjectId(user_id)}, 
-              {$push:{'cart':{'products':p_id, "quantity":1}}}
+              {$push:{'cart':{'products':ObjectId(p_id), "quantity":1}}}
               )
             return res.send(addProduct);
           }else {
