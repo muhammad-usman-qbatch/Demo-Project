@@ -18,21 +18,21 @@ import mongoose from 'mongoose';
 const { ObjectId } = mongoose.Schema.Types;
 
 const cartSchema = new mongoose.Schema({
-    p_id : {
-        type : ObjectId,
-        ref : "ProductStore",
-    },
+   
+    cart : {
+        type: Array,
+        products: {
+            type : ObjectId,
+            ref : "ProductStore",
+            quantity : {
+            type : Number
+            }
+          }
+    }       
+,
     user_id : {
         type : ObjectId,
         ref : "Users"
-    },
-    detail :{
-        name : {
-            type: String
-        },
-        price : {
-            type: Number
-        }
     }
 });
 
